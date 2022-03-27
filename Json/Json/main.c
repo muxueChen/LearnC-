@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include "leptjson.h"
-
+#include<string.h>
 
 static int main_ret = 0;
 static int test_count = 0;
@@ -27,6 +27,7 @@ do{\
 
 #define EXPECT_EQ_INT(expect, actual) EXPECT_EQ_BASE((expect)==(actual), expect, actual, "%d")
 #define EXPECT_EQ_DOUBLE(expect, actual) EXPECT_EQ_BASE((expect) == (actual), expect, actual, "%.17g")
+#define EXPECT_EQ_STRING(expect, actual) EXPECT_EQ_BASE(strcmp(expect, actual) == 0, expect, actual, "%s")
 
 #define TEST_ERROR(error, json)\
 do{\
@@ -113,6 +114,16 @@ static void test_parse_root_not_singular() {
     
 }
 
+static void test_access_string() {
+    lept_value v;
+    lept_init(&v);
+    lept_set_string(&v, "", 0);
+    EXPECT_EQ_STRING("", lept_get_string(&v));
+    lept_set_string(&v, "Hello", 5);
+    EXPECT_EQ_STRING("Hello", lept_get_string(&v));
+    lept_free(&v);
+}
+
 static void test_parse() {
     test_parse_null();
     test_parse_true();
@@ -125,8 +136,10 @@ static void test_parse() {
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    test_parse_expect_value();
+    test_access_string();
     printf("Hello, World!\n");
-
+    // 0x00ff
+    // 1111 1111
+    // short = 1111 1111 0000 0000  >> 8 = 0000 0000 1111 1111
     return 0;
 }

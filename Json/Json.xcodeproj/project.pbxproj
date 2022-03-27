@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FD3B873C27EAA1F2007B77A1 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = FD3B873B27EAA1F2007B77A1 /* main.c */; };
 		FD3B874427EAA20F007B77A1 /* leptjson.c in Sources */ = {isa = PBXBuildFile; fileRef = FD3B874227EAA20F007B77A1 /* leptjson.c */; };
+		FD3B874727F04161007B77A1 /* leptContext.c in Sources */ = {isa = PBXBuildFile; fileRef = FD3B874627F04161007B77A1 /* leptContext.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		FD3B873B27EAA1F2007B77A1 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		FD3B874227EAA20F007B77A1 /* leptjson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = leptjson.c; sourceTree = "<group>"; };
 		FD3B874327EAA20F007B77A1 /* leptjson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = leptjson.h; sourceTree = "<group>"; };
+		FD3B874527F04161007B77A1 /* leptContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = leptContext.h; sourceTree = "<group>"; };
+		FD3B874627F04161007B77A1 /* leptContext.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = leptContext.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,8 @@
 				FD3B873B27EAA1F2007B77A1 /* main.c */,
 				FD3B874227EAA20F007B77A1 /* leptjson.c */,
 				FD3B874327EAA20F007B77A1 /* leptjson.h */,
+				FD3B874527F04161007B77A1 /* leptContext.h */,
+				FD3B874627F04161007B77A1 /* leptContext.c */,
 			);
 			path = Json;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD3B874727F04161007B77A1 /* leptContext.c in Sources */,
 				FD3B874427EAA20F007B77A1 /* leptjson.c in Sources */,
 				FD3B873C27EAA1F2007B77A1 /* main.c in Sources */,
 			);
