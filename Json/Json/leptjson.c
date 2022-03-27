@@ -18,7 +18,7 @@
 #define ISDIGIT1TO9(ch) ((ch)>='1'&&(ch)<='9')
 #define ISDIGIT(ch) ((ch)>='0'&&(ch)<='9')
 #define PUTC(c, ch) do{*(char *)lept_context_push(c, sizeof(char))=(ch);}while(0)
-
+#define STRING_ERROR(ret) do { c->top = head; return ret; } while(0)
 
 void lept_free(lept_value *v) {
     assert(v != NULL);
@@ -95,7 +95,16 @@ static int lept_parse_number(lept_context *c, lept_value *v) {
     return LEPT_PARSE_OK;
 }
 
+static char * lept_parse_hex4(char *p, unsigned u) {
+    return p;
+}
+
+static void lept_encode_utf8(lept_context *c, unsigned u) {
+    
+}
+
 static int lept_parse_string(lept_context *c, lept_value *v) {
+    unsigned u;
     size_t head = c->top, len;
     const char *p;
     EXPECT(c, '\"');
@@ -118,12 +127,18 @@ static int lept_parse_string(lept_context *c, lept_value *v) {
                     case 'n':PUTC(c, '\n');break;
                     case 't':PUTC(c, '\t');break;
                     case 'r':PUTC(c, '\r');break;
+                    case 'u':
+                        if (!(p = lept_parse_hex4(p, &u)))
+                            STRING_ERROR(LEPT_PARSE_INVALID_UNICODE_HEX);
+                        /* \TODO surrogate handling */
+                        lept_encode_utf8(c, u);
+                        break;
                     default:
                         if ((unsigned char)ch<0x20) {
                             c->top = head;
                             return LEPT_PARSE_INVALID_STRING_CHAR;
                         }
-                        PUTC(c, ch); 
+                        PUTC(c, ch);
                         break;
                 }
                 break;
