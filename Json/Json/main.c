@@ -47,6 +47,8 @@ do{\
     EXPECT_EQ_DOUBLE(expect, lept_get_number(&v));\
 } while(0)
 
+#define EXPECT_EQ_SIZE_T(expect, actual) EXPECT_EQ_BASE((expect) == (actual), (size_t)expect, (size_t)actual, "%zu")
+
 static void test_parse_true() {
     lept_value v;
     v.type = LEPT_FALSE;
@@ -105,6 +107,13 @@ static void test_parse_number() {
     TEST_NUMBER(-1.7976931348623157e+308, "-1.7976931348623157e+308");
 }
 
+static void test_parse_array() {
+    lept_value v;
+    lept_init(&v);
+    EXPECT_EQ_INT(LEPT_PARSE_OK, lept_parse(&v, "[]"));
+    EXPECT_EQ_INT(LEPT_ARRAY, lept_get_type(&v));
+    EXPECT_EQ_SIZE_T(0, lept_get_array_size(&v));
+}
 
 static void test_parse_invalid_value() {
     

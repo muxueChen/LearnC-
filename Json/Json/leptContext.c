@@ -14,7 +14,7 @@
 
 #define LEPT_PARSE_STACK_INIT_SIZE 256
 
-void *lept_context_push(lept_context *c, size_t size) {
+void * lept_context_push(lept_context *c, size_t size) {
     void *ret;
     assert(size > 0);
     if (c->top + size >= c->size) {
