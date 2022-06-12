@@ -113,6 +113,18 @@ static void test_parse_array() {
     EXPECT_EQ_INT(LEPT_PARSE_OK, lept_parse(&v, "[]"));
     EXPECT_EQ_INT(LEPT_ARRAY, lept_get_type(&v));
     EXPECT_EQ_SIZE_T(0, lept_get_array_size(&v));
+    lept_free(&v);
+    printf("\nwork:\n");
+    EXPECT_EQ_INT(LEPT_PARSE_OK, lept_parse(&v, "[ null , false , true , 123 , \"abc\"]"));
+    EXPECT_EQ_INT(LEPT_ARRAY, lept_get_type(&v));
+    EXPECT_EQ_INT(5, lept_get_array_size(&v));
+    EXPECT_EQ_INT(LEPT_NULL,   lept_get_type(lept_get_array_element(&v, 0)));
+    EXPECT_EQ_INT(LEPT_FALSE,   lept_get_type(lept_get_array_element(&v, 1)));
+    EXPECT_EQ_INT(LEPT_TRUE,   lept_get_type(lept_get_array_element(&v, 2)));
+    EXPECT_EQ_DOUBLE(123.0,   lept_get_number(lept_get_array_element(&v, 3)));
+    EXPECT_EQ_STRING("abc",   lept_get_string(lept_get_array_element(&v, 4)));
+    
+    
 }
 
 static void test_parse_invalid_value() {
@@ -145,7 +157,7 @@ static void test_parse() {
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    test_access_string();
+    test_parse_array();
     printf("Hello, World!\n");
     // 0x00ff
     // 1111 1111
